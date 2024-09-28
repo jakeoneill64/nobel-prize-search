@@ -1,3 +1,5 @@
+# where can the service accept traffic from
 ingress_cidr        = "0.0.0.0/0"
-vpc_id              = "vpc-0e6cb979ca4de002b"
-key_name            = "cai"
+# where should the service be deployed
+vpc_id              = ""
+region              = "eu-west-2"

@@ -1,7 +1,6 @@
-variable "key_name" {
-  description = "The name of the SSH key pair"
+variable "region" {
+  description = "The region in which to deploy"
   type        = string
-  default     = null
 }
 
 variable "vpc_id" {

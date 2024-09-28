@@ -5,7 +5,7 @@
 # set up repo
 sudo apt-get update
 git clone https://github.com/jakeoneill64/nobel-prize-search.git
-sudo mv cai-nobel-prize-search /opt/
+sudo mv nobel-prize-search /opt/
 sudo chown -R ubuntu /opt/nobel-prize-search
 mkdir /opt/nobel-prize-search/log
 exec > >(tee -a /opt/nobel-prize-search/log/deployment.log) 2>&1 # redirect stdin & stderr to log files
@@ -42,7 +42,7 @@ minikube start
 minikube docker-env > .minikube_vars.sh
 source .minikube_vars.sh
 
-cd /opt/cai-devops-task
+cd /opt/nobel-prize-search
 sudo apt install -y python3.12-venv
 python3 -m venv venv
 source venv/bin/activate

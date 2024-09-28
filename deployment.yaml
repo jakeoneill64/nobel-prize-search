@@ -4,6 +4,7 @@ metadata:
   labels:
     app: mongo
   name: mongo
+  namespace: nobel
 spec:
   replicas: 1
   selector:
@@ -61,3 +62,24 @@ spec:
       - name: "mongo-data-dir"
         persistentVolumeClaim:
           claimName: "mongo-data"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search
+  namespace: nobel
+spec:
+  selector:
+    matchLabels:
+      app: search
+  template:
+    metadata:
+      labels:
+        app: search
+    spec:
+      containers:
+      - image: nobel-search:latest
+        name: nobel-search
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80

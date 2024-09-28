@@ -1,13 +1,12 @@
 provider "aws" {
-  region = "eu-west-2" # Change this to your preferred AWS region
+  region = var.region # Change this to your preferred AWS region
 }
 
-resource "aws_instance" "cai-devops-instance" {
-  ami           = "ami-07c1b39b7b3d2525d"
+resource "aws_instance" "nobel-instance" {
+  ami           = "ami-01ec84b284795cbc7"
   instance_type = "t2.medium"
-  key_name       = var.key_name
 
-  security_groups = [aws_security_group.nobel-sg-name]
+  security_groups = [aws_security_group.nobel-sg.name]
   user_data = file("../env-setup.sh")
 
   root_block_device {
@@ -19,21 +18,14 @@ resource "aws_instance" "cai-devops-instance" {
   }
 }
 
-resource "aws_security_group" "nobel-sg-name" {
-  name        = "cai-devops-sg"
+resource "aws_security_group" "nobel-sg" {
+  name        = "nobel-sg"
   description = "Allow inbound traffic on port 80 and 22 from approved cidr block"
   vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 80
     to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = [var.ingress_cidr]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = [var.ingress_cidr]
   }

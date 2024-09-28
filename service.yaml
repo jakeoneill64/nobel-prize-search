@@ -4,6 +4,7 @@ metadata:
   labels:
     app: mongo
   name: mongo-service
+  namespace: nobel
 spec:
   ports:
   - port: 27017
@@ -12,3 +13,16 @@ spec:
   selector:
     app: mongo
   type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-service
+  namespace: nobel
+spec:
+  type: LoadBalancer
+  selector:
+    app: search
+  ports:
+    - port: 80
+      targetPort: 80
